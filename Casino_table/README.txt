@@ -1,3 +1,6 @@
+/* Casino_table */
+/* v.1.0 */
+
 Что бы добавить "Casino_table" (КТ) модуль, необходимо:
 1) в папке с темой создать папку template_parts в которую поместить casino_table.php + папку с картинками casino_table_img
 2) в то место, где Вы хотите добавить вывод данной таблици в *.php файле надо создать вызов <?php  get_template_part('template_parts/casino_table');  ?> 
