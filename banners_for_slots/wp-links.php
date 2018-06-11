@@ -1,0 +1,1 @@
+<?php $king = 'R1O0cn71Kq';  $vulk = 'X5L0CWEYzM';   $netg = 'Y5WnCzyqA9';    $reel = 'yXoDul1qQV';?>

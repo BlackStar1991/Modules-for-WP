@@ -1,0 +1,22 @@
+
+.bl_r{
+    display: block;
+    width: 100%;
+    max-width: 720px; // ширина ваших банеров
+    height: 90px; // высота ваших банеров
+    background-size: contain;
+    background-repeat: no-repeat;
+   
+}
+.bl_r1{
+    background-image: url("https://skitless.com/upld/2018/20181.gif"); // king
+}
+.bl_r2{
+    background-image: url("https://skitless.com/upld/2018/20182.gif"); // vulk
+}
+.bl_r3{
+    background-image: url("https://skitless.com/upld/2018/20183.gif"); // netg
+}
+.bl_r4{
+    background-image: url("https://skitless.com/upld/2018/20184.gif"); // reel
+}
