@@ -63,7 +63,7 @@ echo $banner[rand(0,3)];
 
 4. Откройте для редактирования файл wp-content/themes/{ВАША_ТЕМА}/footer.php. Ближе к </body> вставьте следующий скрипт:
 <script>
- $(document).ready(function () {
+window.onload = function (){
 
         var abort_load = function () {
             $('{Your_Class_#1}').load('<?= get_bloginfo("template_url"); ?>/wp-single.php');
@@ -72,15 +72,15 @@ echo $banner[rand(0,3)];
             $('{Your_Class_#2}').load('<?= get_bloginfo("template_url"); ?>/wp-single.php');
         };
 
-        setTimeout(abort_load, 2500);   // Время через которое появиться 1-й 
-        setTimeout(success_load, 4000); // Время через которое появиться 2-й 
+        setTimeout(abort_load, 2500);   
+        setTimeout(success_load, 4000); 
 
 
-        $('body').on('click', '[data-href]', function (e) {  /// Добавить данный запрос если, ещё нету.
+        $('body').on('click', '[data-href]', function (e) { 
             window.open($(this).data('href'));
             e.preventDefault();
         });
-    });
+   }
 </script>
 
 
