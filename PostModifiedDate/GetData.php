@@ -29,15 +29,19 @@ if ($_POST['type'] == 'page') {
 }
 $start_date = date('d.m.Y', mktime(0, 0, 0, date("m"), date("d") - $minusDeys, date("Y")));
 $raznica = $minusDeys * 86400;
-$myposts = $my_posts->query(
-    array(
-        'post_type' => $type,
-        'post_status' => 'publish',
-        'posts_per_page' => $posts,
-        'order' => 'ASC',
-        'orderby' => 'post_modified_gmt',
-    )
-);
+//$myposts = $my_posts->query(
+//    array(
+//        'post_type' => $type,
+//        'post_status' => 'publish',
+//        'posts_per_page' => $posts,
+//        'order' => 'ASC',
+//        'orderby' => 'post_modified_gmt',
+//    )
+//);
+global $wpdb;
+$type = "'".implode("','", $type)."'";
+$type = 'IN ('.$type.')';
+$myposts = $wpdb->get_results("SELECT `post_modified`,`post_title`,`ID` FROM `wp_posts` WHERE `post_type` $type AND `post_status` LIKE 'publish' ORDER BY `post_modified` ASC LIMIT $posts");
 ?>
     <script>
         $('#count').html(<?php echo $count_posts?>);
