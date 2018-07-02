@@ -183,9 +183,10 @@ function casinos_install()
          PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
         $wpdb->query($sql);
-        $wpdb->get_results("SELECT * FROM `wp_casinos_setings`");
+        $table_name = $wpdb->prefix . 'casinos_setings';
+        $wpdb->get_results("SELECT * FROM `$table_name`");
         if ($wpdb->num_rows == 0) {
-            $wpdb->query("INSERT INTO `wp_casinos_setings` (`IconsImageDirectory`, `CasinosImageDirectory`,`ShowColumns`,`QueueColumn`) 
+            $wpdb->query("INSERT INTO `$table_name` (`IconsImageDirectory`, `CasinosImageDirectory`,`ShowColumns`,`QueueColumn`) 
 VALUES ('$IconsImageDirectory', '$CasinosImageDirectory','$ShowColumns','$QueueColumn');");
         }
     }

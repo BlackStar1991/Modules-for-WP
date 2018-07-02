@@ -40,7 +40,8 @@ class BodyTable
     {
 
         global $wpdb;
-        $Casinos = $wpdb->get_results("SELECT * FROM `wp_casinos`");
+        $table_name = $wpdb->prefix . 'casinos';
+        $Casinos = $wpdb->get_results("SELECT * FROM `$table_name`");
         $this->BodyTable = '';
         $this->BodyTable .= '    <tbody>';
         foreach ($Casinos as $casino) {
@@ -72,7 +73,8 @@ class BodyTable
     public function GetBodyTableAdmin()
     {
         global $wpdb;
-        $Casinos = $wpdb->get_results("SELECT * FROM `wp_casinos`");
+        $table_name = $wpdb->prefix . 'casinos';
+        $Casinos = $wpdb->get_results("SELECT * FROM `$table_name`");
         $this->BodyTable = '';
         $this->BodyTable .= '    <tbody>';
         $n = 1;

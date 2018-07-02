@@ -21,7 +21,8 @@ class Content
         $this->casinosDir = $Params->getCasinosImageDirectory();
         $this->type = $type;
         global $wpdb;
-        $this->CasinosInfo = $wpdb->get_row("SELECT *  FROM `wp_casinos` WHERE `name` LIKE '$casino' LIMIT 1");
+        $table_name = $wpdb->prefix . 'casinos';
+        $this->CasinosInfo = $wpdb->get_row("SELECT *  FROM `$table_name` WHERE `name` LIKE '$casino' LIMIT 1");
     }
 
     public function name()
