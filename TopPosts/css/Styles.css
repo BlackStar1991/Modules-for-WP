@@ -1,0 +1,77 @@
+.body_list_top {
+
+    font-size: 16px;
+
+
+}
+.quantity_of_top_post {
+    max-width: 600px;
+    margin: 10px 0;
+}
+.body_of_top_post {
+
+}
+#id_quantity_of_top_post {
+
+}
+
+
+.top_post_div{
+    position: relative;
+    max-width: 600px;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    padding: 5px 0;
+    padding-left: 30px;
+    box-sizing: border-box;
+    font-weight: 500;
+    border: 1px solid #000;
+}
+
+.top_post_div:active {
+    background-color: #3c5fce;
+    color: #fff;
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.top_post_div_select {
+    background-color: #74b6ce;
+    
+}
+.button_marker {
+
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border:none;
+    cursor: pointer;
+}
+
+.button_marker[value="Добавить маркер"]{
+    background-color: #1e841e;
+}
+
+.button_marker[value="Удалить маркер"]{
+    background-color: #a7080a;
+}
+
+
+.save_top_list {
+    float: right;
+    border:none;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: 500;
+    background-color: #74b6ce;
+    cursor: pointer;
+    border-radius: 3px;
+
+}
+.save_top_list:hover,
+.save_top_list:focus{
+    background-color: #5168a2;
+}
