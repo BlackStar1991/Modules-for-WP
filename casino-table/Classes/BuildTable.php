@@ -5,6 +5,7 @@ class BuildTable
     protected $Head;
     protected $Body;
     protected $Footer;
+    protected $table ='';
     protected $colums = [
         '' => '',
     ];
@@ -13,7 +14,10 @@ class BuildTable
     {
         $this->BuildTable($type);
     }
-
+    public function __toString()
+    {
+     return $this->table;
+    }
 
     /**
      * @param string $type role
@@ -31,5 +35,6 @@ class BuildTable
             $this->Body = $b->GetBodyTableFront();
         }
         $this->Footer = $f->GetFooterTable($type);
+        return $this->table = $this->Head.$this->Body.$this->Footer;
     }
 }

@@ -13,6 +13,7 @@ class Imeges
     protected $casinosURL;
     protected $IconsUrl;
 
+
     public function __construct()
     {
         $Params = new SettingsTable();

@@ -20,6 +20,10 @@ class HeadTable
         'th_buttons' => 'Кнопки',
         'buttons_actions' => 'Управление',
     ];
+    public function __toString()
+    {
+        return $this->HeadTable;
+    }
 
     /**
      * @param string $type role
@@ -32,11 +36,11 @@ class HeadTable
         $QueueColumn = $Params->getQueueColumn();
         if ($type == 'admin') {
             $this->HeadTable = '<h1 class="table_casino__title">&#x1f0df; Таблицы Казино </h1><div class="table_casino__full">';
-            $this->HeadTable .= '<ul class="table_casino__help"><li>*На визуальную часть будут выводиться только столбци с включенными галочками</li><li>*Для добавления Таблици Казино на нужную Страницу необходимо в поле Описания нужной Страници вставить шорткод <span class="table_casino__strong">[ShowTableFront]</span> , если есть необходимость встаить таблицу в php фаил, то добавлять через <span class="table_casino__strong"> &#60;?php do_shortcode(&quot;[ShowTableFront]&quot;); ?&#62; </span></li><li>*Что бы выбрать несколько значений из ячеек <span class="table_casino__strong">Производители</span> или <span class="table_casino__strong">Игровые валюты</span> зажмите Left Ctrl и нажмите на необходимые пункты</li><li>*Если необходимо добавить другие элементы в рубрику <span class="table_casino__strong">Производители</span> необходимо перейти в нужное подменю</li><li>*Желательно не выводить все колонки таблици по умолчанию, поскольку может нехватать места</li><li></li></ul>';
+            $this->HeadTable .= '<ul class="table_casino__help"><li>*На визуальную часть будут выводиться только столбци с включенными галочками</li><li>*Для добавления Таблици Казино на нужную Страницу необходимо в поле Описания нужной Страници вставить шорткод <span class="table_casino__strong">[ShowTableFront]</span> </br> если есть необходимость встаить таблицу в php фаил, то добавлять через <span class="table_casino__strong"> &#60;?php do_shortcode(&quot;[ShowTableFront]&quot;); ?&#62; </span></li><li>*Что бы выбрать несколько значений из ячеек <span class="table_casino__strong">Производители</span> или <span class="table_casino__strong">Игровые валюты</span> зажмите Left Ctrl и нажмите на необходимые пункты</li><li>*Если необходимо добавить другие элементы в рубрику <span class="table_casino__strong">Производители</span> необходимо перейти в нужное подменю</li><li>*Желательно не выводить все колонки таблици по умолчанию, поскольку может нехватать места</li><li>!Убедитесь что у Вас отклёчен(или очищщен) кэш сайта, и сайт не подключен к dash.cloudflare.com(где отключено кэширование), иначе могут не отображатся изображения</li></ul>';
             $this->HeadTable .= '<form enctype="multipart/form-data" method="post">
             <button class="btn_submit" type="submit">Сохранить</button>';
         }
-        $this->HeadTable .= '<table class="table_casino">
+        $this->HeadTable .= '<div class="table_casino__wrapper"><table class="table_casino">
                                     <thead>
                                     <tr>';
         if ($type == 'admin') {
@@ -81,7 +85,8 @@ class HeadTable
         }
         $this->HeadTable .= '</tr>
         </thead>';
-        echo $this->HeadTable;
-        return;
+//        var_dump($this->HeadTable);
+        return $this->HeadTable;
+//        return;
     }
 }

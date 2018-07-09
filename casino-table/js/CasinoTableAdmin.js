@@ -2,25 +2,15 @@ window.onload = function () {
 
     var body = $("body"),
         casinoTable = $(".table_casino"),
-        showColumnsCheckbox = $(".bl_checkedColumn__checkbox"),
-        dispositionOfColumns = $("#js-queueColumn").val(),
-
 
         currentThead = $(".table_casino thead tr"),
         currentTrBody = $(".table_casino tbody tr"),
         lengthOfWorkColumn = $(".th_but").length,
-
         checkedCheckBoxes = [],
 
         locationURL = document.location.href.split("/wp-admin/");
 
-
-    console.log("lengthOfWorkColumn =" + lengthOfWorkColumn);
-    console.log("dispositionOfColumns =" + dispositionOfColumns);
-
-    // очередь показа
-
-
+    uploadPhoto();
     // Добавление ряда с казино
     body.on("click", ".btn_addNewCasino", function () {
 
@@ -34,6 +24,7 @@ window.onload = function () {
 
         rowNumbering();
 
+        nextRow.find(".table_casino__uploadImg_text").text("Файл не выбран");
         nextRow.find("input[type='text']:not('.custoom_button__name')").val("");
         nextRow.find("input[type='url']").val("");
         nextRow.find(".th_manufacturers select").attr("name", "manufacturers[][]");
@@ -41,7 +32,7 @@ window.onload = function () {
         nextRow.find("textarea").empty();
 
         var noImgUrl = locationURL[0] + "/wp-content/plugins/casino-table/img/casinos/no-image.jpg"; // подставляем no-img картинку
-        nextRow.find(".th_name__img").attr('src', noImgUrl);
+        nextRow.find(".table_casino__uploadImg_image").attr('src', noImgUrl);
 
     });
 
@@ -53,7 +44,7 @@ window.onload = function () {
     });
 
     /// Проверка на запрещенные символы для js_casinoName
-    body.on("keyup",".js_casinoName",function () {
+    body.on("keyup", ".js_casinoName", function () {
             var value = $(this).val();
             value = value.replace(new RegExp('\'', 'g'), '');
             value = value.replace(new RegExp('"', 'g'), '');
@@ -135,28 +126,30 @@ window.onload = function () {
             $(this).find(nameCell).eq(workerIndex).html(currentArr[index]);
         });
     }
+
     AddAncheckBeackgraund();
-   function AddAncheckBeackgraund() {
-       var arr = $("#js-showColumns").val().split(',');
-       $(".bl_checkedColumn__checkbox").each(function () {
-           var indexCurrentColumn = $(this).closest('.th_but').index();
-           if (arr.indexOf( $(this).val()) >=0) {
-               $(this).attr("checked");
-               $(".table_casino thead tr:nth-of-type(2)").find("th").eq(indexCurrentColumn).removeClass("filter_unchecked");
-               currentTrBody.each(function () {
-                   $(this).find("td").eq(indexCurrentColumn).removeClass("filter_unchecked");
-               });
 
-           } else {
-               $(this).removeAttr("checked");
-               $(".table_casino thead tr:nth-of-type(2)").find("th").eq(indexCurrentColumn).addClass("filter_unchecked");
-               currentTrBody.each(function () {
-                   $(this).find("td").eq(indexCurrentColumn).addClass("filter_unchecked");
-               });
-           }
+    function AddAncheckBeackgraund() {
+        var arr = $("#js-showColumns").val().split(',');
+        $(".bl_checkedColumn__checkbox").each(function () {
+            var indexCurrentColumn = $(this).closest('.th_but').index();
+            if (arr.indexOf($(this).val()) >= 0) {
+                $(this).attr("checked");
+                $(".table_casino thead tr:nth-of-type(2)").find("th").eq(indexCurrentColumn).removeClass("filter_unchecked");
+                currentTrBody.each(function () {
+                    $(this).find("td").eq(indexCurrentColumn).removeClass("filter_unchecked");
+                });
 
-       });
-   }
+            } else {
+                $(this).removeAttr("checked");
+                $(".table_casino thead tr:nth-of-type(2)").find("th").eq(indexCurrentColumn).addClass("filter_unchecked");
+                currentTrBody.each(function () {
+                    $(this).find("td").eq(indexCurrentColumn).addClass("filter_unchecked");
+                });
+            }
+
+        });
+    }
 
     // Проверка нажатых checkbox-ов. Перезапись значений value
     function checkForEnterCheckbox() {
@@ -178,10 +171,31 @@ window.onload = function () {
     }
 
 
-
     body.on("click", ".bl_checkedColumn__checkbox", function () {
         checkForEnterCheckbox();
     });
+
+
+    /// Обновление фотографии и подписи без отправки на сервер
+    function uploadPhoto() {
+        body.on("change", ".table_casino__uploadImg_upload", function () {
+
+            var file = $(this).prop('files')[0];
+            var preview = $(this).siblings('.table_casino__uploadImg_image');
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                preview.attr("src", reader.result);
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+                $(this).prev(".table_casino__uploadImg_text").text(file.name);
+            }
+        }).change();
+        $(window).resize(function () {
+            $(".table_casino__uploadImg_upload").triggerHandler("change");
+        });
+
+    }
 
 
 };

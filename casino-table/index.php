@@ -5,19 +5,16 @@ Text Domain: Casino Table
 Description: The DiJust plugin's for generation casino tables
 Author: Pavel Nechushkin
 Author URI: pnechushkin@gmail.com
-Version: 1.0
+Version: 2.0
 */
+
+
 include 'functions.php';
-
-
-function view_tabl()
-{
-
-}
 
 function ShowTableFront()
 {
-    new BuildTable();
+    $table = new BuildTable();
+    return $table;
 
 }
 
@@ -92,10 +89,9 @@ function casinos_editor()
         $table = $wpdb->prefix . 'casinos_setings';
         $wpdb->query("UPDATE `$table` SET `ShowColumns`='$ShowColumns',`QueueColumn`='$QueueColumn'");
     }
-    new BuildTable('admin');
+    echo new BuildTable('admin');
 
 }
-
 
 
 function PartnerIcons()
@@ -129,10 +125,39 @@ function PartnerIcons()
     echo new PartnerIcons();
 }
 
+function replacement_styles()
+{
+    $css_file = plugin_dir_path(__FILE__) . 'css/casino_table_style.css';
+    if ($_POST) {
+        $css_casino = trim($_POST['css_casino']);
+        if (file_exists($css_file) && !empty($css_casino)) {
+            file_put_contents($css_file, $css_casino);
+        }
+    }
+    if (file_exists($css_file)) { ?>
+        <form method="post">
+            <div>Тут можно поменять стили для отображения таблицы казино</div>
+            <div>
+                <label for="css_casino"></label>
+                <textarea rows="30" name="css_casino" id="css_casino"
+                          style="width: 100%"><?php echo file_get_contents($css_file) ?></textarea>
+            </div>
+            <div>
+                <button type="submit">Сохранить</button>
+            </div>
+        </form>
+        <?php
+    } else {
+        echo '<div>айл стилей не обнаружен</div>';
+    }
+}
+
 function casinos_admin_menu()
 {
     add_menu_page('Таблици Казино', 'Таблици Казино', 8, 'casinosTable', 'casinos_editor', 'dashicons-building');
     add_submenu_page('casinosTable', 'Иконки партнеров', 'Иконки партнеров', 8, 'casinosTable/settings', 'PartnerIcons');
+    add_submenu_page('casinosTable', 'Отображаемые стили', 'Отображаемые стили', 8, 'casinosTable/styles', 'replacement_styles');
+
 }
 
 

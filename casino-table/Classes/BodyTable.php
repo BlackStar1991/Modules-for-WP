@@ -32,6 +32,10 @@ class BodyTable
         $this->ParamsTh = $Params->getShowColumns();
         $this->QueueColumn = $Params->getQueueColumn();
     }
+    public function __toString()
+    {
+        return $this->BodyTable;
+    }
 
     /**
      * @return string with the table body for front
@@ -65,7 +69,7 @@ class BodyTable
             $this->BodyTable .= '    </tr>';
         }
         $this->BodyTable .= '</tbody>';
-        echo $this->BodyTable;
+        return $this->BodyTable;
     }
     /**
      * @return string with the table body for admin
@@ -100,6 +104,6 @@ class BodyTable
             $this->BodyTable .= '<td class="td_actions">' . $content->actions() . '</td>';
             $this->BodyTable .= '    </tr>';
         }
-        echo $this->BodyTable;
+        return $this->BodyTable;
     }
 }

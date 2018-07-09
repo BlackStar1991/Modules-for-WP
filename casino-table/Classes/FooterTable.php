@@ -10,6 +10,11 @@ class FooterTable
 {
     protected $FooterTable;
 
+    public function __toString()
+    {
+     return $this->FooterTable;
+    }
+
     public function GetFooterTable($type = '')
     {
         if ($type == 'admin') {
@@ -22,9 +27,7 @@ class FooterTable
 </form>
 </tbody>';
         }
-        $this->FooterTable .= '</table>
-                                </div>';
-        echo $this->FooterTable;
-        return;
+        $this->FooterTable .= '</table></div>';
+        return $this->FooterTable;
     }
 }
